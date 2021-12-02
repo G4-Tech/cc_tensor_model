@@ -147,10 +147,10 @@ def upload_image():
         prob = pred[0,1]*100
         prob_n = 100-prob
         if (pred[0,1] <= 0.5):
-            pre_c_name = 'Covid Possitive'
+            pre_c_name = 'Covid Positive'
             prob_c = 100-prob
         else:
-            pre_c_name = 'Covid Nagative'
+            pre_c_name = 'Covid Negative'
             prob_c = pred[0,1]*100
         cursor.execute("INSERT INTO db_cc_Photo (img , name , age, city, state, pincode, mobile, gender, bloodgroup,predicted_class_name, probabilities ) VALUES (%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s , %s)", (filename, name , age, city, state, pincode, mobile, gender, bloodgroup, pre_c_name,prob_c) )
         conn.commit() 
@@ -161,9 +161,9 @@ def upload_image():
         #display(image_path)
         if (pred[0,1] <= 0.5):
 
-            return render_template('index.html', prob_text='Patient is Covid-19 Possitive And Probability is : {}'.format( prob_n) , filename=filename) 
+            return render_template('index.html', prob_text='Patient is Covid-19 Positive And Probability is : {}'.format( prob_n) , filename=filename) 
         else:
-            return render_template('index.html', prob_text='Covid-19 Nagative And Probability is : {}'.format(prob ) , filename=filename)
+            return render_template('index.html', prob_text='Covid-19 Negative And Probability is : {}'.format(prob ) , filename=filename)
  
         flash('Image successfully uploaded and displayed below')
         #return render_template('index.html', filename=filename)
